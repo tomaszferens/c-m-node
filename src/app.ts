@@ -1,22 +1,16 @@
-import express, { type ErrorRequestHandler } from "express";
+import express from "express";
 
+import { ordersRouter } from "./routes/orders/router";
 import { productsRouter } from "./routes/products/router";
-import { ApiError } from "./utils/errors";
+import { globalRequestErrorHandler } from "./utils/globalRequestErrorHandler";
 
 export const app = express();
-
-const errorHandler: ErrorRequestHandler = (err, _req, res, next) => {
-  if (err instanceof ApiError) {
-    return res.status(err.statusCode).json({ message: err.message });
-  }
-
-  if (err instanceof Error) {
-    return res.status(500).json({ message: err.message });
-  }
-
-  next(err);
-};
+const apiRouter = express.Router();
 
 app.use(express.json());
-app.use("/products", productsRouter);
-app.use(errorHandler);
+
+apiRouter.use("/products", productsRouter);
+apiRouter.use("/orders", ordersRouter);
+
+app.use("/api", apiRouter);
+app.use(globalRequestErrorHandler);

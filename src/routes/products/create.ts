@@ -9,7 +9,7 @@ export const createRouter = express.Router();
 const bodySchema = zod.object({
   name: zod.string().min(1).max(50),
   description: zod.string().min(1).max(512),
-  price: zod.number().min(0),
+  price: zod.number().gt(0),
   stock: zod.number().min(0),
 });
 

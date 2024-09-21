@@ -4,6 +4,12 @@ import { db, tables } from "../database/client";
 import { ApiError } from "../utils/errors";
 
 export class ProductRepository {
+  static findById(id: number) {
+    return db.query.product.findFirst({
+      where: eq(tables.product.id, id),
+    });
+  }
+
   static list() {
     return db.query.product.findMany();
   }
@@ -28,8 +34,8 @@ export class ProductRepository {
       .returning();
   }
 
-  static async sell(id: number, quantity: number) {
-    const currentStock = await db.query.product.findFirst({
+  static async sell(id: number, quantity: number, dbClient = db) {
+    const currentStock = await dbClient.query.product.findFirst({
       where: eq(tables.product.id, id),
     });
 
@@ -43,7 +49,7 @@ export class ProductRepository {
       throw new ApiError("Insufficient stock", 400);
     }
 
-    return db
+    return dbClient
       .update(tables.product)
       .set({ stock: sql`${tables.product.stock} - ${quantity}` })
       .where(eq(tables.product.id, id))
