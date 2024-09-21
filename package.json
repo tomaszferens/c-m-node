@@ -30,6 +30,7 @@
     "better-sqlite3": "^11.3.0",
     "drizzle-orm": "^0.33.0",
     "express": "^4.21.0",
+    "express-zod-safe": "^1.2.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
