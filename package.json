@@ -14,9 +14,12 @@
     "lint-fix": "pnpm run lint --fix",
     "database:generate-migration": "drizzle-kit generate",
     "database:run-migrations": "tsx src/database/migrate.ts",
-    "database:prune": "rm -rf ./sqlite.db && rm -rf ./drizzle",
+    "database:remove-db": "rm -rf ./sqlite.db",
+    "database:remove-migrations": "rm -rf ./drizzle",
+    "database:prune": "pnpm database:remove-db && pnpm database:remove-migrations",
     "database:seed": "tsx src/database/seed/main.ts",
     "database:reset": "pnpm database:prune && pnpm database:generate-migration && pnpm database:run-migrations && pnpm pnpm database:seed",
+    "database:clear": "pnpm database:remove-db && pnpm database:run-migrations && pnpm pnpm database:seed",
     "database:studio": "drizzle-kit studio"
   },
   "keywords": [],
