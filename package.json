@@ -19,7 +19,7 @@
     "database:prune": "pnpm database:remove-db && pnpm database:remove-migrations",
     "database:seed": "tsx src/database/seed/main.ts",
     "database:reset": "pnpm database:prune && pnpm database:generate-migration && pnpm database:run-migrations && pnpm pnpm database:seed",
-    "database:clear": "pnpm database:remove-db && pnpm database:run-migrations && pnpm pnpm database:seed",
+    "database:init": "pnpm database:remove-db && pnpm database:run-migrations && pnpm pnpm database:seed",
     "database:studio": "drizzle-kit studio"
   },
   "keywords": [],
