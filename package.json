@@ -11,21 +11,31 @@
     "type-check": "tsc --noEmit",
     "init-env": "if [ ! -f ./.env ]; then cp ./.env.example ./.env; fi",
     "lint": "eslint .",
-    "lint-fix": "pnpm run lint --fix"
+    "lint-fix": "pnpm run lint --fix",
+    "database:generate-migration": "drizzle-kit generate",
+    "database:run-migrations": "tsx src/database/migrate.ts",
+    "database:prune": "rm -rf ./sqlite.db && rm -rf ./drizzle",
+    "database:seed": "tsx src/database/seed/main.ts",
+    "database:reset": "pnpm database:prune && pnpm database:generate-migration && pnpm database:run-migrations && pnpm pnpm database:seed",
+    "database:studio": "drizzle-kit studio"
   },
   "keywords": [],
   "author": "Tomasz Ferens",
   "license": "ISC",
   "dependencies": {
     "@dotenvx/dotenvx": "^1.14.1",
+    "better-sqlite3": "^11.3.0",
+    "drizzle-orm": "^0.33.0",
     "express": "^4.21.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
     "@eslint/compat": "^1.1.1",
     "@eslint/js": "^9.11.0",
+    "@types/better-sqlite3": "^7.6.11",
     "@types/express": "^4.17.21",
     "@types/node": "^22.5.5",
+    "drizzle-kit": "^0.24.2",
     "eslint": "^9.11.0",
     "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-prettier": "^5.2.1",
