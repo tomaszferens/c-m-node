@@ -13,14 +13,15 @@
     "lint": "eslint .",
     "lint-fix": "pnpm run lint --fix",
     "database:generate-migration": "drizzle-kit generate",
-    "database:run-migrations": "tsx src/database/migrate.ts",
+    "database:run-migrations": "dotenvx run -- tsx src/database/migrate.ts",
     "database:remove-db": "rm -rf ./sqlite.db",
     "database:remove-migrations": "rm -rf ./drizzle",
     "database:prune": "pnpm database:remove-db && pnpm database:remove-migrations",
-    "database:seed": "tsx src/database/seed/main.ts",
+    "database:seed": "dotenvx run -- tsx src/database/seed/main.ts",
     "database:reset": "pnpm database:prune && pnpm database:generate-migration && pnpm database:run-migrations && pnpm pnpm database:seed",
     "database:init": "pnpm database:remove-db && pnpm database:run-migrations && pnpm pnpm database:seed",
-    "database:studio": "drizzle-kit studio"
+    "database:studio": "drizzle-kit studio",
+    "test": "dotenvx run -- vitest"
   },
   "keywords": [],
   "author": "Tomasz Ferens",
@@ -39,15 +40,18 @@
     "@types/better-sqlite3": "^7.6.11",
     "@types/express": "^4.17.21",
     "@types/node": "^22.5.5",
+    "@types/supertest": "^6.0.2",
     "drizzle-kit": "^0.24.2",
     "eslint": "^9.11.0",
     "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-prettier": "^5.2.1",
     "globals": "^15.9.0",
     "prettier": "^3.3.3",
+    "supertest": "^7.0.0",
     "tsup": "^8.3.0",
     "tsx": "^4.19.1",
     "typescript": "^5.6.2",
-    "typescript-eslint": "^8.6.0"
+    "typescript-eslint": "^8.6.0",
+    "vitest": "^2.1.1"
   }
 }

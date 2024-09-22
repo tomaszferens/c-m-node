@@ -3,6 +3,7 @@ import { z } from "zod";
 const zodEnvSchema = z.object({
   PORT: z.string(),
   NODE_ENV: z.string(),
+  DATABASE_URL: z.string(),
 });
 
 function parseEnv() {

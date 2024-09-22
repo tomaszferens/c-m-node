@@ -18,7 +18,7 @@ const validation = validate({ body: bodySchema });
 createRouter.post("/", validation, async (req, res, next) => {
   try {
     const data = await ProductRepository.create(req.body);
-    res.json(data);
+    res.status(201).json(data);
   } catch (error) {
     next(error);
   }

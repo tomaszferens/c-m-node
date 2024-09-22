@@ -65,12 +65,16 @@ createRouter.post("/", validation, async (req, res, next) => {
       );
     }
 
-    const data = await OrderRepository.placeOrder(
-      req.body.customerId,
-      req.body.products,
-    );
-
-    return res.json(data);
+    try {
+      const data = await OrderRepository.placeOrder(
+        req.body.customerId,
+        req.body.products,
+      );
+      return res.json(data);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown error";
+      throw new ApiError(`Failed to place an order: ${message}`, 500);
+    }
   } catch (error) {
     next(error);
   }
