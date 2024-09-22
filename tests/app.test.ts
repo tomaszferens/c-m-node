@@ -191,7 +191,7 @@ describe("products", () => {
     const response = await request(app)
       .post(`/api/orders`)
       .send({ customerId: 1, products: [{ id: productId, quantity: 5 }] })
-      .expect(200);
+      .expect(201);
 
     expect(response.body).toEqual({
       order: {

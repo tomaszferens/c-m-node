@@ -70,7 +70,7 @@ createRouter.post("/", validation, async (req, res, next) => {
         req.body.customerId,
         req.body.products,
       );
-      return res.json(data);
+      return res.status(201).json(data);
     } catch (error) {
       const message = error instanceof Error ? error.message : "Unknown error";
       throw new ApiError(`Failed to place an order: ${message}`, 500);
