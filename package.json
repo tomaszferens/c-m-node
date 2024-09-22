@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Node.js project with TypeScript",
   "main": "dist/main.js",
+  "type": "module",
   "scripts": {
     "dev": "pnpm init-env && dotenvx run -- tsx watch src/main.ts",
-    "build": "tsup src/main.ts",
+    "build": "tsup src/main.ts --format esm",
     "start": "dotenvx run -- node dist/main.js",
     "build-start": "pnpm run build && pnpm run start",
     "type-check": "tsc --noEmit",
