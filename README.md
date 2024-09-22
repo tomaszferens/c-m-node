@@ -54,6 +54,15 @@ To start the project in development mode:
 pnpm run dev
 ```
 
+
+### Initialize database
+
+To initialize (or reset) the database:
+
+```bash
+pnpm run database:init
+```
+
 ### Building and Starting
 
 To build the project:
