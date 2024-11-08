@@ -13,12 +13,9 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
 
-    "module": "NodeNext",
+    "module": "preserve",
     "outDir": "dist",
-    "sourceMap": true,
-
-    "composite": true,
-    "declarationMap": true,
+    "noEmit": true,
 
     "lib": ["es2022"]
   }
